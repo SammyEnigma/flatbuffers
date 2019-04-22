@@ -673,8 +673,8 @@ CheckedError Parser::ParseField(StructDef &struct_def) {
     ECHECK(ParseSingleValue(&field->name, field->value, true));
     if (!IsScalar(type.base_type) ||
         (struct_def.fixed && field->value.constant != "0"))
-      return Error(
-            "default values currently only supported for scalars in tables");
+      Warning("default values currently only supported for scalars in tables: "
+              + struct_def.name);
   }
   if (type.enum_def &&
       !type.enum_def->is_union &&
